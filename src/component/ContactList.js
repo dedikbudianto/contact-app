@@ -10,7 +10,6 @@ export class ContactList extends Component {
   }
 
   render() {
-
     // ContactList component filters the data to show based on the filterText prop
     const filteredContacts = this.props.contacts.filter((contact) =>
       contact.name.indexOf(this.props.filterText) !== -1

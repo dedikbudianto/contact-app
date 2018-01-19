@@ -7,11 +7,15 @@ import { ContactList } from './ContactList';
 class ContactApp extends Component {
 
   static propTypes = {
+    filterText: PropTypes.string.isRequired,
     contacts: PropTypes.arrayOf(PropTypes.object)
   }
 
   handleUserInput = (searchItem) => {
-    this.props.dispatch({type: "FILTERING"});
+    this.props.dispatch({
+      type: 'FILTERING',
+      searchItem // it will add key 'searchItem' with argument searchItem
+    });
   }
 
   render() {

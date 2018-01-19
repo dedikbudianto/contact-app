@@ -12,9 +12,10 @@ const initialState = {
 }
 
 function reducer(state = initialState, action) {
-  if(action.type === "FILTERING") {
-    return {
-      filterText: state.searchItem
+  if(action.type === 'FILTERING') {
+    return{
+      ...state,
+      filterText: action.searchItem // access searchItem in reducer by the key ('searchItem')
     }
   }
   return state;
