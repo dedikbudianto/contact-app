@@ -5,7 +5,7 @@ import { createStore } from 'redux';
 import ContactApp from './component/ContactApp';
 import contactList from './config/contacts.json';
 
-const { contacts: contacts } = contactList;
+const { contacts: contact } = contactList;
 
 const initialState = {
   filterText: ''
@@ -14,7 +14,6 @@ const initialState = {
 function reducer(state = initialState, action) {
   if(action.type === 'FILTERING') {
     return{
-      ...state,
       filterText: action.searchItem // access searchItem in reducer by the key ('searchItem')
     }
   }
@@ -25,7 +24,7 @@ const store = createStore(reducer);
 
 const App = () => (
   <Provider store={store}>
-    <ContactApp contacts={contacts} />
+    <ContactApp contacts={contact} />
   </Provider>
 )
 
