@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as actions from '../redux/actions';
+import { handleUserInput } from '../redux/actions';
 import { SearchBar } from './SearchBar';
 import { ContactList } from './ContactList';
 
@@ -11,20 +14,13 @@ class ContactApp extends Component {
     contacts: PropTypes.arrayOf(PropTypes.object)
   }
 
-  handleUserInput = (searchItem) => {
-    this.props.dispatch({
-      type: 'FILTERING',
-      searchItem // it will add key 'searchItem' with argument searchItem
-    });
-  }
-
   render() {
     return(
       <div>
         {/* SearchBar component will receive the filterText as a prop and set the input field value to this prop */}
         <SearchBar
           filterText={this.props.filterText}
-          onUserInput={this.handleUserInput}
+          onUserInput={this.props.handleUserInput}
         />
         {/* ContactList component also receives filterText as a prop and filters the contacts to show based on its value */}
         <ContactList
@@ -36,13 +32,21 @@ class ContactApp extends Component {
   }
 }
 
-function mapStateToProps(state) {
+const mapStateToProps = (state) => {
   return {
     filterText: state.filterText
   }
 }
 
-export default connect(mapStateToProps)(ContactApp);
+// the mapDispatchToProps() receives the dispatch function from the store
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({
+    ...actions,
+    handleUserInput: handleUserInput
+  }, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ContactApp);
 
 // Main (stateful) component.
 // Renders a SearchBar and a ContactList
