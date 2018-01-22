@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as actions from '../redux/actions';
 import { handleUserInput } from '../redux/actions';
 import { SearchBar } from './SearchBar';
 import { ContactList } from './ContactList';
@@ -11,7 +10,8 @@ class ContactApp extends Component {
 
   static propTypes = {
     filterText: PropTypes.string.isRequired,
-    contacts: PropTypes.arrayOf(PropTypes.object)
+    handleUserInput: PropTypes.func.isRequired,
+    contacts: PropTypes.arrayOf(PropTypes.object).isRequired
   }
 
   render() {
@@ -41,7 +41,6 @@ const mapStateToProps = (state) => {
 // the mapDispatchToProps() receives the dispatch function from the store
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
-    ...actions,
     handleUserInput: handleUserInput
   }, dispatch)
 }

@@ -9,6 +9,6 @@ export class ContactItem extends Component {
   }
 
   render() {
-    return <li>{this.props.name} {this.props.email}</li>
+    return <li>{this.props.name}, email: {this.props.email}</li>
   }
 }
